@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import notes from "./data/notes.js";
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
+import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 const app = express();
 
@@ -21,6 +22,10 @@ app.get("/api/notes", (req, res) => {
 });
 
 app.use("/api/users", userRoutes);
+
+// Middleware for handling the errors
+app.use(notFound);
+app.use(errorHandler);
 
 app.get("/api/notes/:id", (req, res) => {
   const note = notes.find((n) => n._id === req.params.id);
