@@ -34,7 +34,7 @@ const userSchema = mongoose.Schema(
   }
 );
 
-// This code for just hashing the password bcryptly
+// bcrypt the password
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
