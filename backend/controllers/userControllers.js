@@ -1,6 +1,8 @@
 import User from "../models/userModel.js";
 import asyncHandler from "express-async-handler";
 
+// User Registration Functionality
+
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, pic } = req.body;
 
@@ -33,6 +35,8 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error("Error Occured");
   }
 });
+
+// Login Functionality logic
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
