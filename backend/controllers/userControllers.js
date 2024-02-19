@@ -1,8 +1,8 @@
 import User from "../models/userModel.js";
 import asyncHandler from "express-async-handler";
+import generateToken from "../utils/generateToken.js";
 
 // User Registration Functionality
-
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, pic } = req.body;
 
@@ -29,6 +29,7 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       pic: user.pic,
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -50,6 +51,7 @@ const authUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       pic: user.pic,
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
