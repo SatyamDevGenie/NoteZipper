@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { Children, useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import MainScreen from "../../components/MainScreen";
 import "./LoginScreen.css";
 import axios from "axios";
+import Loading from "../../components/Loading";
+import ErrorMessage from "../../components/ErrorMessage";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -45,6 +47,8 @@ const LoginScreen = () => {
   return (
     <MainScreen title="LOGIN">
       <div className="loginContainer">
+        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+        {loading && <Loading />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
