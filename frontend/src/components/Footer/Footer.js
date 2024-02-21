@@ -18,11 +18,11 @@ const Footer = () => {
             className="text-center py-3"
             style={{
               fontWeight: "bold",
-              fontSize: "1.1rem",
+              fontSize: "1rem",
               fontFamily: "Georgia",
             }}
           >
-            Copyrights &nbsp; &copy; &nbsp; Note Zipper
+            Note Zipper App &nbsp; &nbsp;&nbsp;&copy; &nbsp; Trust us before use
           </Col>
         </Row>
       </Container>

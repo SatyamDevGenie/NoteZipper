@@ -1,9 +1,11 @@
 .title {
-  font-size: 60px;
+  font-size: 50px;
+  font-family: "Georgia";
 }
 .subtitle {
   font-size: 25px;
   padding-top: 10px;
+  margin: 10px;
 }
 .intro-text {
   width: 100%;
@@ -39,7 +41,10 @@
 
 @media only screen and (max-width: 768px) {
   .title {
-    font-size: 40px;
+    font-size: 25px;
+  }
+  .subtitle {
+    font-size: 15px;
   }
   .landingbutton {
     width: 150px;

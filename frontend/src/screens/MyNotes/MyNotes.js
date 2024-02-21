@@ -27,14 +27,14 @@ const MyNotes = () => {
   return (
     <MainScreen title="Welcome Back Satyam...">
       <Link to="createnote">
-        <Button style={{ marginLeft: "30px" }} size="lg">
+        <Button size="lg" className="ml-3">
           Create New Note
         </Button>
       </Link>
       <br /> <br />
       {notes.map((note) => (
         <Accordion key={note._id}>
-          <Card style={{ marginTop: "10" }}>
+          <Card>
             <Card.Header style={{ display: "flex" }}>
               <span
                 style={{
@@ -47,7 +47,7 @@ const MyNotes = () => {
                 }}
               >
                 <Accordion.Item eventKey="0" variant="link">
-                  <Accordion.Header style={{ fontSize: "1.3rem" }}>
+                  <Accordion.Header style={{ fontSize: "1rem" }}>
                     {note.title}
                   </Accordion.Header>
                 </Accordion.Item>
@@ -69,9 +69,9 @@ const MyNotes = () => {
                 <h5 style={{ fontFamily: "Georgia" }}>
                   <Badge
                     style={{
-                      padding: "1rem",
+                      padding: "0.5rem",
                       border: "1px solid #1c1c50",
-                      borderRadius: "10px",
+                      borderRadius: "5px",
                       marginLeft: "20px",
                       variant: "success",
                       fontSize: "0.8rem",

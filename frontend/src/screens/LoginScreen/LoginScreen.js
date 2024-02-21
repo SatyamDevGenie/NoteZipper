@@ -1,4 +1,4 @@
-import React, { Children, useState } from "react";
+import React, { useState } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import MainScreen from "../../components/MainScreen";
@@ -51,31 +51,31 @@ const LoginScreen = () => {
         {loading && <Loading />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label className="email">Email Address</Form.Label>
             <Form.Control
               type="email"
               value={email}
-              placeholder="Enter email"
+              placeholder="email@gmail.com"
               onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
           <br />
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className="password">Password</Form.Label>
             <Form.Control
               type="password"
               value={password}
-              placeholder="Password"
+              placeholder="******"
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
 
-          <Button variant="primary mt-3" type="submit">
-            Submit
+          <Button variant="secondary mt-3" type="submit" className="btn">
+            Login
           </Button>
         </Form>
         <Row className="py-3">
-          <Col>
+          <Col style={{ fontFamily: "Arial Black" }}>
             New Customer ? <Link to="/register">Register Here</Link>
           </Col>
         </Row>
