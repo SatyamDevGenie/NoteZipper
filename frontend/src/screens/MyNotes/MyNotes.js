@@ -27,7 +27,7 @@ const MyNotes = () => {
   return (
     <MainScreen title="Welcome Back Satyam...">
       <Link to="createnote">
-        <Button style={{ marginLeft: "10" }} size="lg">
+        <Button style={{ marginLeft: "30px" }} size="lg">
           Create New Note
         </Button>
       </Link>
@@ -64,10 +64,6 @@ const MyNotes = () => {
               </div>
             </Card.Header>
             <Accordion.Item eventKey="0">
-              {/* <Accordion.Header style={{ padding: "1rem" }}>
-                <h6>{note.count}</h6>
-              </Accordion.Header> */}
-
               <Accordion.Body>
                 <br />
                 <h5 style={{ fontFamily: "Georgia" }}>
