@@ -47,16 +47,47 @@ const RegisterScreen = () => {
     }
   };
 
-  const postDetails = (p) => {
-    p.preventDefault();
+  const postDetails = (pics) => {
+    if (!pics) {
+      return setPicMessage("Please select an Image");
+    }
+    setPicMessage(null);
+
+    if (pics.type === "image/jpeg" || pics.type === "image/png") {
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "notezipper");
+      data.append("cloud_name", "drhama97q");
+      fetch("https://api.cloudinary.com/v1_1/drhama97q/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setPic(data.url.toString());
+
+          // This below code is just for reference....
+          // if (data.url) {
+          //   setPic(data.url.toString());
+          // } else {
+          //   console.error("No 'url' property found in the response data.");
+          // }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return setPicMessage("Please select an Image");
+    }
   };
 
   return (
     <MainScreen title="REGISTER">
       <div className="loginContainer">
+        {loading && <Loading />}
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
         {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
-        {loading && <loading />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">
             <Form.Label className="name">Name</Form.Label>
@@ -95,13 +126,19 @@ const RegisterScreen = () => {
             />
           </Form.Group>
 
+          {picMessage && (
+            <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
+          )}
           <Form.Group controlId="formFile" className="mt-3">
             <Form.Label className="upload">
               {" "}
               Upload your Profile Picture
             </Form.Label>
             <Form.Group controlId="formFile" className="mb-3">
-              <Form.Control type="file" onChange={postDetails} />
+              <Form.Control
+                type="file"
+                onChange={(e) => postDetails(e.target.files[0])}
+              />
             </Form.Group>
           </Form.Group>
 
