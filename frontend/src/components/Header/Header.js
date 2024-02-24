@@ -13,7 +13,13 @@ function Header() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
       <Container>
-        <Navbar.Brand style={{ fontFamily: "Verdana", fontWeight: "bold" }}>
+        <Navbar.Brand
+          style={{
+            fontFamily: "Arial Black",
+            fontWeight: "bold",
+            color: "wheat",
+          }}
+        >
           <Link to="/"> Note Zipper</Link>
         </Navbar.Brand>
 
@@ -30,13 +36,23 @@ function Header() {
           </Nav>
           <Nav>
             <>
-              <Nav.Link style={{ fontFamily: "Georgia", fontWeight: "bold" }}>
+              <Nav.Link
+                style={{
+                  fontFamily: "Arial Black",
+                  fontWeight: "bold",
+                  color: "wheat",
+                }}
+              >
                 <Link to="/mynotes"> My Notes</Link>
               </Nav.Link>
               <NavDropdown
                 title="Satyam Sawant"
                 id="collasible-nav-dropdown"
-                style={{ fontFamily: "Georgia", fontWeight: "bold" }}
+                style={{
+                  fontFamily: "Arial Black",
+                  fontWeight: "bold",
+                  color: "#1c1c50",
+                }}
               >
                 <NavDropdown.Item>My Profile</NavDropdown.Item>
                 <NavDropdown.Divider />
