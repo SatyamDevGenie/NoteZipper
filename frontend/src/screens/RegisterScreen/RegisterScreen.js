@@ -66,13 +66,6 @@ const RegisterScreen = () => {
         .then((data) => {
           console.log(data);
           setPic(data.url.toString());
-
-          // This below code is just for reference....
-          // if (data.url) {
-          //   setPic(data.url.toString());
-          // } else {
-          //   console.error("No 'url' property found in the response data.");
-          // }
         })
         .catch((err) => {
           console.log(err);
