@@ -20,7 +20,7 @@ function Header() {
 
   const logoutHandler = () => {
     dispatch(logout);
-    navigate(`/`);
+    navigate("/");
   };
 
   return (
