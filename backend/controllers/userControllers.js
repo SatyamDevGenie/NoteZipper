@@ -57,6 +57,11 @@ const authUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Invalid Email or Password");
   }
+
+  if (user & (email === "") || password === "") {
+    res.status(400);
+    throw new Error("Please fill this fields");
+  }
 });
 
 export { registerUser, authUser };

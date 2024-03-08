@@ -12,6 +12,7 @@ import { login } from "../../actions/userActions";
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,14 +28,20 @@ const LoginScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
-    console.log(email, password);
+
+    if (email === "" && password === "") {
+      setMessage("Please fill this feilds");
+    } else {
+      dispatch(login(email, password));
+      navigate("/mynotes");
+    }
   };
 
   return (
     <MainScreen title="LOGIN">
       <div className="loginContainer">
         {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+        {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
         {loading && <Loading />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="formBasicEmail">
