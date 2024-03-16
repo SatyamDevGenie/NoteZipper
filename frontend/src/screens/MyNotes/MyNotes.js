@@ -1,38 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import MainScreen from "../../components/MainScreen";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Accordion, Badge, Button, Card } from "react-bootstrap";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { listNotes } from "../../actions/notesActions";
+import Loading from "../../components/Loading";
+import ErrorMessage from "../../components/ErrorMessage";
 
 const MyNotes = () => {
-  const [notes, setNotes] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const noteList = useSelector((state) => state.noteList);
+  const { loading, error, notes } = noteList;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  // const [notes, setNotes] = useState([]);   ...no longer need this
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you Sure?")) {
     }
   };
 
-  const fetchNotes = async () => {
-    const { data } = await axios.get("/api/notes");
-
-    setNotes(data);
-  };
-
   console.log(notes);
 
   useEffect(() => {
-    fetchNotes();
-  }, []);
+    dispatch(listNotes());
+    if (!userInfo) {
+      navigate("/");
+    }
+  }, [dispatch]);
 
   return (
-    <MainScreen title="Welcome Back Satyam...">
+    <MainScreen title={`Welcome Back ${userInfo && userInfo.name}..`}>
       <Link to="createnote">
         <Button size="lg" className="ml-3">
           Create New Note
         </Button>
       </Link>
-      <br /> <br />
-      {notes.map((note) => (
+      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+      {loading && <Loading />}
+      <br />
+      <br />
+
+      {notes?.map((note) => (
         <Accordion key={note._id}>
           <Card>
             <Card.Header style={{ display: "flex" }}>
@@ -82,9 +96,12 @@ const MyNotes = () => {
                   </Badge>
                 </h5>
                 <blockquote className="blockquote mb-0">
-                  <p style={{ padding: "0.5rem" }}>{note.content}</p>
+                  <p>{note.content}</p>
                   <footer className="blockquote-footer">
-                    Created On - Date
+                    Created On{" "}
+                    <cite title="Source Title">
+                      {note.createdAt.substring(0, 10)}
+                    </cite>
                   </footer>
                 </blockquote>
               </Accordion.Body>
