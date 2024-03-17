@@ -18,7 +18,11 @@ const MyNotes = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  // const [notes, setNotes] = useState([]);   ...no longer need this
+  const noteCreate = useSelector((state) => state.noteCreate);
+  const { success: successCreate } = noteCreate;
+
+  // const noteUpdate = useSelector((state) => state.noteUpdate);
+  // const { success: successUpdate } = noteUpdate;
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you Sure?")) {
@@ -32,11 +36,11 @@ const MyNotes = () => {
     if (!userInfo) {
       navigate("/");
     }
-  }, [dispatch]);
+  }, [dispatch, successCreate, navigate, userInfo, successUpdate]);
 
   return (
     <MainScreen title={`Welcome Back ${userInfo && userInfo.name}..`}>
-      <Link to="createnote">
+      <Link to="/createnote">
         <Button size="lg" className="ml-3">
           Create New Note
         </Button>
@@ -46,7 +50,7 @@ const MyNotes = () => {
       <br />
       <br />
 
-      {notes?.map((note) => (
+      {notes?.reverse().map((note) => (
         <Accordion key={note._id}>
           <Card>
             <Card.Header style={{ display: "flex" }}>
