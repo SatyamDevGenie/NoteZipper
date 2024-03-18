@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Accordion, Badge, Button, Card } from "react-bootstrap";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { listNotes } from "../../actions/notesActions";
+import { deleteNoteAction, listNotes } from "../../actions/notesActions";
 import Loading from "../../components/Loading";
 import ErrorMessage from "../../components/ErrorMessage";
 
@@ -21,11 +21,19 @@ const MyNotes = () => {
   const noteCreate = useSelector((state) => state.noteCreate);
   const { success: successCreate } = noteCreate;
 
-  // const noteUpdate = useSelector((state) => state.noteUpdate);
-  // const { success: successUpdate } = noteUpdate;
+  const noteUpdate = useSelector((state) => state.noteUpdate);
+  const { success: successUpdate } = noteUpdate;
+
+  const noteDelete = useSelector((state) => state.noteDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = noteDelete;
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you Sure?")) {
+      dispatch(deleteNoteAction(id));
     }
   };
 
@@ -36,7 +44,14 @@ const MyNotes = () => {
     if (!userInfo) {
       navigate("/");
     }
-  }, [dispatch, successCreate, navigate, userInfo, successUpdate]);
+  }, [
+    dispatch,
+    successCreate,
+    navigate,
+    userInfo,
+    successUpdate,
+    successDelete,
+  ]);
 
   return (
     <MainScreen title={`Welcome Back ${userInfo && userInfo.name}..`}>
@@ -45,6 +60,10 @@ const MyNotes = () => {
           Create New Note
         </Button>
       </Link>
+      {errorDelete && (
+        <ErrorMessage variant="danger">{errorDelete}</ErrorMessage>
+      )}
+      {loadingDelete && <Loading />}
       {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
       {loading && <Loading />}
       <br />
