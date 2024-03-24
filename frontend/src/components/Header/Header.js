@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 
-function Header() {
+function Header({ setSearch }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -21,6 +21,10 @@ function Header() {
   const logoutHandler = () => {
     dispatch(logout);
     navigate("/");
+  };
+
+  const searchHandle = (e) => {
+    setSearch(e.target.value);
   };
 
   return (
@@ -44,6 +48,7 @@ function Header() {
                 type="text"
                 placeholder="Search"
                 className="mr-sm-2"
+                onChange={searchHandle}
               />
             </Form>
           </Nav>
