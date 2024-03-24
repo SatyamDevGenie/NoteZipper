@@ -64,7 +64,7 @@ function Header({ setSearch }) {
                 <Link to="/mynotes"> My Notes</Link>
               </Nav.Link>
               <NavDropdown
-                title="Satyam Sawant"
+                title={userInfo.name}
                 id="collasible-nav-dropdown"
                 style={{
                   fontFamily: "Arial Black",
