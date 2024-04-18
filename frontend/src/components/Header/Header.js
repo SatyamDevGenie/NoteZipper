@@ -7,9 +7,9 @@ import {
   Navbar,
   NavDropdown,
 } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../actions/userActions";
-import { useDispatch, useSelector } from "react-redux";
 
 function Header({ setSearch }) {
   const navigate = useNavigate();
@@ -52,36 +52,42 @@ function Header({ setSearch }) {
               />
             </Form>
           </Nav>
+
           <Nav>
-            <>
-              <Nav.Link
-                style={{
-                  fontFamily: "Arial Black",
-                  fontWeight: "bold",
-                  color: "wheat",
-                }}
-              >
-                <Link to="/mynotes"> My Notes</Link>
-              </Nav.Link>
-              <NavDropdown
-                title={userInfo.name}
-                id="collasible-nav-dropdown"
-                style={{
-                  fontFamily: "Arial Black",
-                  fontWeight: "bold",
-                  color: "#1c1c50",
-                }}
-              >
-                <NavDropdown.Item>My Profile</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={logoutHandler}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            </>
-            {/* <Nav.Link style={{ fontFamily: "Georgia", fontWeight: "bold" }}>
-              Login
-            </Nav.Link> */}
+            {userInfo ? (
+              <>
+                <Nav.Link
+                  style={{
+                    fontFamily: "Arial Black",
+                    fontWeight: "bold",
+                    color: "wheat",
+                  }}
+                >
+                  <Link to="/mynotes"> My Notes</Link>
+                </Nav.Link>
+                <NavDropdown
+                  title={userInfo.name}
+                  id="collasible-nav-dropdown"
+                  style={{
+                    fontFamily: "Arial Black",
+                    fontWeight: "bold",
+                    color: "#1c1c50",
+                  }}
+                >
+                  <NavDropdown.Item>My Profile</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </>
+            ) : (
+              <Nav>
+                <Nav.Link>
+                  <Link to="/login">Login</Link>
+                </Nav.Link>
+              </Nav>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
