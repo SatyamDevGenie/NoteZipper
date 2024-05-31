@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
-// import notes from "./data/notes.js";
+import path from "path";
 import connectDB from "./config/db.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 import noteRoutes from "./routes/noteRoutes.js";
