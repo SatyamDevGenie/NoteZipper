@@ -16,6 +16,10 @@ app.use(express.json()); // Request for json data
 app.use("/api/users", userRoutes);
 app.use("/api/notes", noteRoutes);
 
+// Create a static folder
+const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/build")));
 
