@@ -53,42 +53,40 @@ function Header({ setSearch }) {
             </Form>
           </Nav>
 
-          <Nav>
-            {userInfo ? (
-              <>
-                <Nav.Link
-                  style={{
-                    fontFamily: "Arial Black",
-                    fontWeight: "bold",
-                    color: "wheat",
-                  }}
-                >
-                  <Link to="/mynotes"> My Notes</Link>
-                </Nav.Link>
-                <NavDropdown
-                  title={userInfo.name}
-                  id="collasible-nav-dropdown"
-                  style={{
-                    fontFamily: "Arial Black",
-                    fontWeight: "bold",
-                    color: "#1c1c50",
-                  }}
-                >
-                  <NavDropdown.Item>My Profile</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={logoutHandler}>
-                    Logout
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </>
-            ) : (
-              <Nav>
-                <Nav.Link>
-                  <Link to="/login">Login</Link>
-                </Nav.Link>
-              </Nav>
-            )}
-          </Nav>
+          {userInfo ? (
+            <Nav>
+              <Nav.Link
+                style={{
+                  fontFamily: "Arial Black",
+                  fontWeight: "bold",
+                  color: "wheat",
+                }}
+              >
+                <Link to="/mynotes"> My Notes</Link>
+              </Nav.Link>
+              <NavDropdown
+                title={userInfo?.name}
+                id="collasible-nav-dropdown"
+                style={{
+                  fontFamily: "Arial Black",
+                  fontWeight: "bold",
+                  color: "#1c1c50",
+                }}
+              >
+                <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={logoutHandler}>
+                  Logout
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          ) : (
+            <Nav>
+              <Nav.Link>
+                <Link to="/login">Login</Link>
+              </Nav.Link>
+            </Nav>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
