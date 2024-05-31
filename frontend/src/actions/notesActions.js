@@ -1,18 +1,18 @@
+import axios from "axios";
 import {
+  NOTE_CREATE_FAIL,
+  NOTE_CREATE_REQUEST,
+  NOTE_CREATE_SUCCESS,
+  NOTE_DELETE_FAIL,
+  NOTE_DELETE_REQUEST,
+  NOTE_DELETE_SUCCESS,
   NOTE_LIST_FAIL,
   NOTE_LIST_REQUEST,
   NOTE_LIST_SUCCESS,
-  NOTE_CREATE_REQUEST,
-  NOTE_CREATE_SUCCESS,
-  NOTE_CREATE_FAIL,
+  NOTE_UPDATE_FAIL,
   NOTE_UPDATE_REQUEST,
   NOTE_UPDATE_SUCCESS,
-  NOTE_UPDATE_FAIL,
-  NOTE_DELETE_REQUEST,
-  NOTE_DELETE_SUCCESS,
-  NOTE_DELETE_FAIL,
 } from "../constants/notesConstants";
-import axios from "axios";
 
 export const listNotes = () => async (dispatch, getState) => {
   try {
@@ -30,7 +30,10 @@ export const listNotes = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/notes`, config);
+    const { data } = await axios.get(
+      `https://note-zipper-app-1.onrender.com/api/notes`,
+      config
+    );
 
     dispatch({
       type: NOTE_LIST_SUCCESS,
@@ -67,7 +70,7 @@ export const createNoteAction =
       };
 
       const { data } = await axios.post(
-        `/api/notes/create`,
+        `https://note-zipper-app-1.onrender.com/api/notes/create`,
         { title, content, category },
         config
       );
@@ -107,7 +110,7 @@ export const updateNoteAction =
       };
 
       const { data } = await axios.put(
-        `/api/notes/${id}`,
+        `https://note-zipper-app-1.onrender.com/api/notes/${id}`,
         { title, content, category },
         config
       );
@@ -144,7 +147,10 @@ export const deleteNoteAction = (id) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.delete(`/api/notes/${id}`, config);
+    const { data } = await axios.delete(
+      `https://note-zipper-app-1.onrender.com/api/notes/${id}`,
+      config
+    );
 
     dispatch({
       type: NOTE_DELETE_SUCCESS,
