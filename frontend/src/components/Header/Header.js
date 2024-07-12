@@ -19,7 +19,7 @@ function Header({ setSearch }) {
   const { userInfo } = userLogin;
 
   const logoutHandler = () => {
-    dispatch(logout);
+    dispatch(logout());
     navigate("/");
   };
 
@@ -37,7 +37,7 @@ function Header({ setSearch }) {
             color: "wheat",
           }}
         >
-          <Link to="/"> Note Zipper</Link>
+          <Link to="/">Note Zipper</Link>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -62,7 +62,7 @@ function Header({ setSearch }) {
                   color: "wheat",
                 }}
               >
-                <Link to="/mynotes"> My Notes</Link>
+                <Link to="/mynotes">My Notes</Link>
               </Nav.Link>
               <NavDropdown
                 title={userInfo?.name}
