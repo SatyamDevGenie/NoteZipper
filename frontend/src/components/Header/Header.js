@@ -10,6 +10,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../actions/userActions";
+import "./Header.css";
 
 function Header({ setSearch }) {
   const navigate = useNavigate();
@@ -28,65 +29,54 @@ function Header({ setSearch }) {
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark" fixed="top">
       <Container>
-        <Navbar.Brand
-          style={{
-            fontFamily: "Arial Black",
-            fontWeight: "bold",
-            color: "wheat",
-          }}
-        >
-          <Link to="/">Note Zipper</Link>
+        <Navbar.Brand>
+          <Link to="/" className="navbar-brand-link">
+            Note Zipper
+          </Link>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="m-auto">
-            <Form inline style={{ width: "275px" }}>
+            <Form className="d-flex">
               <FormControl
-                type="text"
+                type="search"
                 placeholder="Search"
-                className="mr-sm-2"
+                className="me-2"
+                aria-label="Search"
                 onChange={searchHandle}
               />
             </Form>
           </Nav>
 
-          {userInfo ? (
-            <Nav>
-              <Nav.Link
-                style={{
-                  fontFamily: "Arial Black",
-                  fontWeight: "bold",
-                  color: "wheat",
-                }}
-              >
-                <Link to="/mynotes">My Notes</Link>
+          <Nav className="ms-auto">
+            {userInfo ? (
+              <>
+                <Nav.Link as={Link} to="/mynotes" className="nav-link-custom">
+                  My Notes
+                </Nav.Link>
+                <NavDropdown
+                  title={userInfo.name}
+                  id="collasible-nav-dropdown"
+                  className="nav-dropdown-custom"
+                >
+                  <NavDropdown.Item as={Link} to="/profile">
+                    My Profile
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </>
+            ) : (
+              <Nav.Link as={Link} to="/login" className="nav-link-custom">
+                Login
               </Nav.Link>
-              <NavDropdown
-                title={userInfo?.name}
-                id="collasible-nav-dropdown"
-                style={{
-                  fontFamily: "Arial Black",
-                  fontWeight: "bold",
-                  color: "#1c1c50",
-                }}
-              >
-                <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={logoutHandler}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-          ) : (
-            <Nav>
-              <Nav.Link>
-                <Link to="/login">Login</Link>
-              </Nav.Link>
-            </Nav>
-          )}
+            )}
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>

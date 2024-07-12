@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 
 import "./MainScreen.css";
 
@@ -10,6 +10,7 @@ const MainScreen = ({ title, children }) => {
       <Container>
         <Row>
           <div className="page">
+            <br /> <br /> <br /> <br />
             {title && (
               <>
                 <h1 className="heading">{title}</h1>

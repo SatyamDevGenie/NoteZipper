@@ -1,0 +1,45 @@
+.navbar-brand-link {
+  font-family: "Arial Black", sans-serif;
+  font-weight: bold;
+  color: wheat;
+  text-decoration: none;
+}
+
+.navbar-brand-link:hover {
+  color: #fff;
+}
+
+.nav-link-custom {
+  font-family: "Arial Black", sans-serif;
+  font-weight: bold;
+  color: wheat;
+  text-decoration: none;
+}
+
+.nav-link-custom:hover {
+  color: #fff;
+}
+
+.nav-dropdown-custom {
+  font-family: "Arial Black", sans-serif;
+  font-weight: bold;
+  color: #1c1c50;
+}
+
+.nav-dropdown-custom .dropdown-item {
+  color: #1c1c50;
+}
+
+.nav-dropdown-custom .dropdown-item:hover {
+  background-color: #e9ecef;
+  color: #1c1c50;
+}
+
+.form-inline {
+  display: flex;
+  align-items: center;
+}
+
+.me-2 {
+  margin-right: 0.5rem;
+}
