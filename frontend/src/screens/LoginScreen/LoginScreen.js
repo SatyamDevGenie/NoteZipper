@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import MainScreen from "../../components/MainScreen";
 import "./LoginScreen.css";
 
-import Loading from "../../components/Loading";
-import ErrorMessage from "../../components/ErrorMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/userActions";
+import ErrorMessage from "../../components/ErrorMessage";
+import Loading from "../../components/Loading";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
