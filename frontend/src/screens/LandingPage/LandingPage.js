@@ -1,47 +1,34 @@
-import { React } from "react";
-import { Button, Container, Row } from "react-bootstrap";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./LandingPage.css";
 
 const LandingPage = () => {
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const userInfo = localStorage.getItem("userInfo");
-
-  //   if (userInfo) {
-  //     navigate("/mynotes");
-  //   }
-  // }, [navigate]);
-
   return (
-    <div className="main">
-      <Container>
-        <Row>
-          <div className="intro-text">
-            <div>
-              <h1 className="title">Welcome to Note Zipper</h1>
-              <p className="subtitle">One safe place for all your notes.</p>
-            </div>
-            <div className="buttonContainer">
-              <Link to="/login">
-                <Button size="lg" className="landingbutton">
-                  Login
-                </Button>
-              </Link>
-              <Link to="/register">
-                <Button
-                  size="lg"
-                  className="landingbutton"
-                  variant="outline-primary"
-                >
-                  Register
-                </Button>
-              </Link>
-            </div>
+    <div className="main flex flex-col items-center justify-center h-screen bg-gray-100">
+      <div className="container mx-auto px-4">
+        <div className="intro-text text-center">
+          <div>
+            <h1 className="title text-4xl font-bold mb-4">
+              Welcome to Note Zipper
+            </h1>
+            <p className="subtitle text-xl mb-8">
+              One safe place for all your notes.
+            </p>
           </div>
-        </Row>
-      </Container>
+          <div className="buttonContainer flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <Link to="/login">
+              <button className="landingbutton px-8 py-3 text-lg bg-blue-600 text-white rounded hover:bg-blue-700">
+                Login
+              </button>
+            </Link>
+            <Link to="/register">
+              <button className="landingbutton px-8 py-3 text-lg border border-blue-600 text-blue-600 rounded hover:bg-blue-600 hover:text-white">
+                Register
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
