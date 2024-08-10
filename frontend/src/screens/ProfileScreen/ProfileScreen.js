@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import MainScreen from "../../components/MainScreen";
 
 const ProfileScreen = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [pic, setPic] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [picMessage, setPicMessage] = useState();
+
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -24,7 +31,7 @@ const ProfileScreen = () => {
               justifyContent: "center",
             }}
           >
-            profilPic
+            <img src={pic} alt={name} className="profilePic" />
           </Col>
         </Row>
       </div>
