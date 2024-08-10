@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { updateProfile } from "../../actions/userActions";
 import ErrorMessage from "../../components/ErrorMessage";
+import Loading from "../../components/Loading";
 import MainScreen from "../../components/MainScreen"; // Ensure correct import
 
 const ProfileScreen = () => {
@@ -59,12 +61,25 @@ const ProfileScreen = () => {
     }
   };
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (password === confirmPassword)
+      dispatch(updateProfile({ name, email, password, pic }));
+  };
+
   return (
     <MainScreen title="EDIT PROFILE">
       <div>
         <Row className="profileContainer">
           <Col md={6}>
-            <Form>
+            <Form onSubmit={submitHandler}>
+              {loading && <Loading />}
+              {success && (
+                <ErrorMessage variant="success">
+                  Update Successfully
+                </ErrorMessage>
+              )}
+              {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
               <Form.Group controlId="name">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
