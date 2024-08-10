@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import ErrorMessage from "../../components/ErrorMessage";
 import MainScreen from "../../components/MainScreen"; // Ensure correct import
 
 const ProfileScreen = () => {
@@ -12,12 +14,23 @@ const ProfileScreen = () => {
   const [picMessage, setPicMessage] = useState();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const userUpdate = useSelector((state) => state.userUpdate);
   const { loading, error, success } = userUpdate;
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("/");
+    } else {
+      setName(userInfo.name);
+      setEmail(userInfo.email);
+      setPic(userInfo.pic);
+    }
+  }, [navigate, userInfo]);
 
   const postDetails = (pics) => {
     if (!pics) {
@@ -88,6 +101,9 @@ const ProfileScreen = () => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 ></Form.Control>
               </Form.Group>
+              {picMessage && (
+                <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
+              )}
               <Form.Group controlId="pic">
                 <Form.Label>Change Profile Picture</Form.Label>
                 <Form.Control
