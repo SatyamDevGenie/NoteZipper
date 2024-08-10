@@ -1,8 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./LandingPage.css";
 
 const LandingPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userInfo");
+
+    if (userInfo) {
+      navigate("/mynotes");
+    }
+  }, [navigate]);
+
   return (
     <div className="main flex flex-col items-center justify-center h-screen bg-gray-100">
       <div className="container mx-auto px-4">

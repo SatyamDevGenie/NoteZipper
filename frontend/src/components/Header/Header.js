@@ -68,7 +68,7 @@ function Header({ setSearch }) {
                   id="collasible-nav-dropdown"
                   className="nav-dropdown-custom"
                 >
-                  <NavDropdown.Item as={Link} to="/profile">
+                  <NavDropdown.Item href="/profile">
                     My Profile
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
