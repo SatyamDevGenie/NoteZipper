@@ -43,3 +43,7 @@
 .me-2 {
   margin-right: 0.5rem;
 }
+
+.d-flex {
+  width: 100%;
+}
