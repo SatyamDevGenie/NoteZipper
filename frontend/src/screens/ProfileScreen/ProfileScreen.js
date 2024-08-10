@@ -95,7 +95,7 @@ const ProfileScreen = () => {
                   onChange={(e) => postDetails(e.target.files[0])}
                 />
               </Form.Group>
-              <Button type="submit" variant="primary">
+              <Button type="submit" variant="primary" className="mt-3">
                 Update
               </Button>
             </Form>
