@@ -18,7 +18,7 @@ const LandingPage = () => {
       <div className="container mx-auto px-4">
         <div className="intro-text text-center">
           <div>
-            <h1 className="title text-4xl font-bold mb-4">
+            <h1 className="title text-3xl font-bold mb-4">
               Welcome to Note Zipper
             </h1>
             <p className="subtitle text-xl mb-8">
