@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Row, Col } from "react-bootstrap";
-import MainScreen from "../../components/MainScreen";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { register } from "../../actions/userActions";
 import ErrorMessage from "../../components/ErrorMessage";
 import Loading from "../../components/Loading";
-import "./RegisterScreen.css";
-import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../actions/userActions";
+import MainScreen from "../../components/MainScreen";
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");
@@ -43,7 +41,7 @@ const RegisterScreen = () => {
 
   const postDetails = (pics) => {
     if (!pics) {
-      return setPicMessage("Please select an Image");
+      return setPicMessage("Please select an image");
     }
     setPicMessage(null);
 
@@ -65,79 +63,115 @@ const RegisterScreen = () => {
           console.log(err);
         });
     } else {
-      return setPicMessage("Please select an Image");
+      return setPicMessage("Please select a valid image format");
     }
   };
 
   return (
     <MainScreen title="REGISTER">
-      <div className="loginContainer">
-        {loading && <Loading />}
-        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-        {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
-        <Form onSubmit={submitHandler}>
-          <Form.Group controlId="name">
-            <Form.Label className="name">Name</Form.Label>
-            <Form.Control
-              type="name"
-              value={name}
-              placeholder="Enter your full name"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="formBasicEmail" className="mt-3">
-            <Form.Label className="email">Email address</Form.Label>
-            <Form.Control
-              type="email"
-              value={email}
-              placeholder="email@gmail.com"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="formBasicPassword" className="mt-3">
-            <Form.Label className="password">Password</Form.Label>
-            <Form.Control
-              type="password"
-              value={password}
-              placeholder="******"
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </Form.Group>
-          <Form.Group controlId="confirmPassword" className="mt-3">
-            <Form.Label className="password">Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              value={confirmPassword}
-              placeholder="******"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </Form.Group>
-
-          {picMessage && (
-            <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
-          )}
-          <Form.Group controlId="formFile" className="mt-3">
-            <Form.Label className="upload">
-              {" "}
-              Upload your Profile Picture
-            </Form.Label>
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Control
-                type="file"
-                onChange={(e) => postDetails(e.target.files[0])}
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+          {loading && <Loading />}
+          {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+          {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
+          <form onSubmit={submitHandler} className="space-y-4">
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-gray-700 font-semibold mb-1"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                placeholder="Enter your full name"
+                onChange={(e) => setName(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-            </Form.Group>
-          </Form.Group>
-
-          <Button variant="primary" type="submit" className="mt-3">
-            Register
-          </Button>
-        </Form>
-        <Row className="py-3">
-          <Col style={{ fontFamily: "Arial Black" }}>
-            Already have a Account ? <Link to="/login">Login Here</Link>
-          </Col>
-        </Row>
+            </div>
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-gray-700 font-semibold mb-1"
+              >
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                placeholder="email@gmail.com"
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-gray-700 font-semibold mb-1"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                placeholder="******"
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="confirmPassword"
+                className="block text-gray-700 font-semibold mb-1"
+              >
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                value={confirmPassword}
+                placeholder="******"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            {picMessage && (
+              <ErrorMessage variant="danger">{picMessage}</ErrorMessage>
+            )}
+            <div className="mt-3">
+              <label
+                htmlFor="formFile"
+                className="block text-gray-700 font-semibold mb-1"
+              >
+                Upload your Profile Picture
+              </label>
+              <input
+                type="file"
+                id="formFile"
+                onChange={(e) => postDetails(e.target.files[0])}
+                className="w-full p-2 border border-gray-300 rounded-md"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              Register
+            </button>
+          </form>
+          <div className="text-center py-4">
+            <p className="text-gray-600 font-medium">
+              Already have an account?{" "}
+              <Link to="/login" className="text-blue-500 hover:underline">
+                Login Here
+              </Link>
+            </p>
+          </div>
+        </div>
       </div>
     </MainScreen>
   );
